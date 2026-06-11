@@ -10,6 +10,7 @@ from pypdf import PdfReader
 from docx import Document
 
 nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 
 st.set_page_config(
