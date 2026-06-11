@@ -1,6 +1,0 @@
-streamlit
-nltk
-pandas
-pypdf
-python-docx
-matplotlib
