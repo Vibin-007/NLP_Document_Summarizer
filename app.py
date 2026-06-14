@@ -28,26 +28,14 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-if "dark_mode" not in st.session_state:
-    st.session_state.dark_mode = False
-
 def apply_css():
-    if st.session_state.dark_mode:
-        bg = "#121212"
-        text_color = "#e0e0e0"
-        card_bg = "rgba(255, 255, 255, 0.03)"
-        border_color = "rgba(255, 255, 255, 0.08)"
-        accent = "#ffffff"
-        highlight_bg = "rgba(255, 255, 255, 0.1)"
-        highlight_border = "rgba(255, 255, 255, 0.3)"
-    else:
-        bg = "#f8f9fa"
-        text_color = "#212529"
-        card_bg = "#ffffff"
-        border_color = "rgba(0, 0, 0, 0.08)"
-        accent = "#000000"
-        highlight_bg = "rgba(0, 0, 0, 0.05)"
-        highlight_border = "rgba(0, 0, 0, 0.2)"
+    bg = "#121212"
+    text_color = "#e0e0e0"
+    card_bg = "rgba(255, 255, 255, 0.03)"
+    border_color = "rgba(255, 255, 255, 0.08)"
+    accent = "#ffffff"
+    highlight_bg = "rgba(255, 255, 255, 0.1)"
+    highlight_border = "rgba(255, 255, 255, 0.3)"
 
     st.markdown(
         f"""
@@ -77,12 +65,6 @@ def apply_css():
             border-color: {border_color};
             opacity: 0.5;
         }}
-        .stToggle label p {{
-            font-size: 0.9rem !important;
-            font-weight: 500 !important;
-            color: {text_color} !important;
-        }}
-
         .glass-card {{
             background: {card_bg};
             border-radius: 8px;
@@ -182,7 +164,6 @@ with st.sidebar:
     st.markdown("<h2 style='text-align: center; margin-bottom: 0.5rem; font-weight: 600;'>NLP Document Summarizer</h2>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; opacity: 0.6; margin-bottom: 2rem; font-size: 0.85rem;'>Research Assistant Interface</p>", unsafe_allow_html=True)
 
-    st.toggle("Dark Theme", key="dark_mode")
     st.markdown("---")
     
     uploaded_file = st.file_uploader("Upload Document", type=["pdf", "docx", "txt"])
@@ -235,7 +216,7 @@ def extract_keywords(text, n=10):
     return sorted(kw_extractor.extract_keywords(text), key=lambda x: x[1])
 
 def color_func_gray(word, font_size, position, orientation, random_state=None, **kwargs):
-    shade = random.randint(40, 100) if st.session_state.dark_mode else random.randint(20, 70)
+    shade = random.randint(40, 100)
     return f"hsl(0, 0%, {shade}%)"
 
 def generate_wordcloud(text):
@@ -344,7 +325,7 @@ if uploaded_file:
                 showlegend=False, 
                 xaxis_title="Relevance Score", 
                 yaxis_title="", 
-                font=dict(color="#e0e0e0" if st.session_state.dark_mode else "#212529"), 
+                font=dict(color="#e0e0e0"), 
                 margin=dict(l=0, r=0, t=0, b=0), 
                 coloraxis_showscale=False
             )
