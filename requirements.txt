@@ -1,6 +1,9 @@
 streamlit
 nltk
-pandas
 pypdf
 python-docx
+yake
+wordcloud
 matplotlib
+plotly
+gTTS
